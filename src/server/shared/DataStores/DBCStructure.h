@@ -731,6 +731,13 @@ struct FactionTemplateEntry
     bool IsContestedGuardFaction() const { return (Flags & FACTION_TEMPLATE_FLAG_CONTESTED_GUARD) != 0; }
 };
 
+struct GameObjectArtKitEntry
+{
+    uint32 ID;                                              // 0
+    //char* TextureVariation[3]                             // 1-3 m_textureVariations[3]
+    //char* AttachModel[4]                                  // 4-8 m_attachModels[4]
+};
+
 struct GameObjectDisplayInfoEntry
 {
     uint32 ID;                                              // 0
@@ -1675,7 +1682,7 @@ struct TalentTabEntry
     //unit32 SpellIconID;                                   // 18
     //uint32 RaceMask;                                      // 19
     uint32 ClassMask;                                       // 20
-    uint32 CategoryEnumID;                                  // 21
+    uint32 PetTalentMask;                                   // 21
     uint32 OrderIndex;                                      // 22
     //char* BackgroundFile;                                 // 23
 };

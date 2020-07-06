@@ -1638,9 +1638,9 @@ public:
         char* fill_str = args ? strtok((char*)args, " ") : nullptr;
         char* duration_str = args ? strtok(nullptr, " ") : nullptr;
 
-        int duration = duration_str ? atoi(duration_str) : -1;
-        if (duration <= 0 || duration >= 30 * MINUTE) // arbitary upper limit
-            duration = 3 * MINUTE;
+        Seconds duration = duration_str ? Seconds(atoi(duration_str)) : 0s;
+        if (duration <= 0s || duration >= 30min) // arbitary upper limit
+            duration = 3min;
 
         bool doFill = fill_str ? (stricmp(fill_str, "FILL") == 0) : false;
 
@@ -1917,7 +1917,7 @@ public:
         auto mapId = args->TryConsume<uint32>();
         if (mapId)
         {
-            sMapMgr->DoForAllMapsWithMapId(mapId.get(),
+            sMapMgr->DoForAllMapsWithMapId(mapId.value(),
                 [handler](Map* map) -> void
                 {
                     HandleDebugGuidLimitsMap(handler, map);
@@ -1950,7 +1950,7 @@ public:
         auto mapId = args->TryConsume<uint32>();
         if (mapId)
         {
-            sMapMgr->DoForAllMapsWithMapId(mapId.get(),
+            sMapMgr->DoForAllMapsWithMapId(mapId.value(),
                 [handler](Map* map) -> void
                 {
                     HandleDebugObjectCountMap(handler, map);
