@@ -28,7 +28,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 7,
-  "iteration": 1595939048589,
+  "iteration": 1592337929176,
   "links": [],
   "panels": [
     {
@@ -232,7 +232,7 @@
         "name": "realm",
         "options": [],
         "query": "show tag values from events with key = realm",
-        "refresh": 1,
+        "refresh": true,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -276,5 +276,5 @@
   "timezone": "browser",
   "title": "Network",
   "uid": "_QtkMmWMk",
-  "version": 2
+  "version": 1
 }
