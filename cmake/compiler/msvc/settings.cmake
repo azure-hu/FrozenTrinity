@@ -24,6 +24,7 @@ target_compile_options(trinity-warning-interface
     /W3)
 
 # disable permissive mode to make msvc more eager to reject code that other compilers don't already accept
+# UNCOMMENT these lines ONLY if using Windows 10 SDK, compilation fails with Windows 8.1 SDK
 #target_compile_options(trinity-compile-option-interface
 #  INTERFACE
 #    /permissive-)
