@@ -114,7 +114,7 @@ DBCStorage <HolidaysEntry>                sHolidaysStore(Holidaysfmt);
 DBCStorage <ItemEntry>                    sItemStore(Itemfmt);
 DBCStorage <ItemBagFamilyEntry>           sItemBagFamilyStore(ItemBagFamilyfmt);
 //DBCStorage <ItemCondExtCostsEntry> sItemCondExtCostsStore(ItemCondExtCostsEntryfmt);
-//DBCStorage <ItemDisplayInfoEntry> sItemDisplayInfoStore(ItemDisplayTemplateEntryfmt); -- not used currently
+DBCStorage <ItemDisplayInfoEntry> sItemDisplayInfoStore(ItemDisplayTemplateEntryfmt);
 DBCStorage <ItemExtendedCostEntry> sItemExtendedCostStore(ItemExtendedCostEntryfmt);
 DBCStorage <ItemLimitCategoryEntry> sItemLimitCategoryStore(ItemLimitCategoryEntryfmt);
 DBCStorage <ItemRandomPropertiesEntry> sItemRandomPropertiesStore(ItemRandomPropertiesfmt);
@@ -180,6 +180,7 @@ DBCStorage <StableSlotPricesEntry> sStableSlotPricesStore(StableSlotPricesfmt);
 DBCStorage <SummonPropertiesEntry> sSummonPropertiesStore(SummonPropertiesfmt);
 DBCStorage <TalentEntry> sTalentStore(TalentEntryfmt);
 TalentSpellPosMap sTalentSpellPosMap;
+std::unordered_set<uint32> sPetTalentSpells;
 DBCStorage <TalentTabEntry> sTalentTabStore(TalentTabEntryfmt);
 
 // store absolute bit position for first rank for talent inspect
@@ -334,7 +335,7 @@ void LoadDBCStores(const std::string& dataPath)
     LOAD_DBC(sHolidaysStore,                      "Holidays.dbc");
     LOAD_DBC(sItemStore,                          "Item.dbc");
     LOAD_DBC(sItemBagFamilyStore,                 "ItemBagFamily.dbc");
-    //LOAD_DBC(sItemDisplayInfoStore,               "ItemDisplayInfo.dbc");     -- not used currently
+    LOAD_DBC(sItemDisplayInfoStore,               "ItemDisplayInfo.dbc");
     //LOAD_DBC(sItemCondExtCostsStore,              "ItemCondExtCosts.dbc");
     LOAD_DBC(sItemExtendedCostStore,              "ItemExtendedCost.dbc");
     LOAD_DBC(sItemLimitCategoryStore,             "ItemLimitCategory.dbc");
@@ -525,11 +526,17 @@ void LoadDBCStores(const std::string& dataPath)
     // create talent spells set
     for (TalentEntry const* talentInfo : sTalentStore)
     {
+        TalentTabEntry const* talentTab = sTalentTabStore.LookupEntry(talentInfo->TabID);
         for (uint8 j = 0; j < MAX_TALENT_RANK; ++j)
+        {
             if (talentInfo->SpellRank[j])
+            {
                 sTalentSpellPosMap[talentInfo->SpellRank[j]] = TalentSpellPos(talentInfo->ID, j);
+                if (talentTab && talentTab->PetTalentMask)
+                    sPetTalentSpells.insert(talentInfo->SpellRank[j]);
+            }
+        }
     }
-
 
     // prepare fast data access to bit pos of talent ranks for use at inspecting
     {

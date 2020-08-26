@@ -175,7 +175,7 @@ public:
     public:
         SendRefPackLogin(Player* _player) : player(_player)
         {
-            _player->m_Events.AddEvent(this, _player->m_Events.CalculateTime(1000));
+            _player->m_Events.AddEvent(this, _player->m_Events.CalculateTime(Milliseconds(1000)));
         }
 
         bool Execute(uint64, uint32) override
@@ -267,7 +267,7 @@ public:
             Timed(Player* player, Creature* creature) : guid(creature->GetGUID()), player(player), triggered(false)
             {
                 CloseGossipMenuFor(player);
-                player->m_Events.AddEvent(this, player->m_Events.CalculateTime(1));
+                player->m_Events.AddEvent(this, player->m_Events.CalculateTime(Milliseconds(1)));
             }
 
             bool Execute(uint64, uint32) override
@@ -275,7 +275,7 @@ public:
                 if (!triggered)
                 {
                     triggered = true;
-                    player->m_Events.AddEvent(this, player->m_Events.CalculateTime(1));
+                    player->m_Events.AddEvent(this, player->m_Events.CalculateTime(Milliseconds(1)));
                     return false;
                 }
                 if (Creature* creature = player->GetNPCIfCanInteractWith(guid, UNIT_NPC_FLAG_GOSSIP))

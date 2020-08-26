@@ -24,6 +24,7 @@
 #include <list>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 
 enum LocaleConstant : uint8;
 
@@ -143,7 +144,7 @@ TC_GAME_API extern DBCStorage <GtRegenMPPerSptEntry>         sGtRegenMPPerSptSto
 TC_GAME_API extern DBCStorage <HolidaysEntry>                sHolidaysStore;
 TC_GAME_API extern DBCStorage <ItemEntry>                    sItemStore;
 TC_GAME_API extern DBCStorage <ItemBagFamilyEntry>           sItemBagFamilyStore;
-//TC_GAME_API extern DBCStorage <ItemDisplayInfoEntry>      sItemDisplayInfoStore; -- not used currently
+TC_GAME_API extern DBCStorage <ItemDisplayInfoEntry>         sItemDisplayInfoStore;
 TC_GAME_API extern DBCStorage <ItemExtendedCostEntry>        sItemExtendedCostStore;
 TC_GAME_API extern DBCStorage <ItemLimitCategoryEntry>       sItemLimitCategoryStore;
 TC_GAME_API extern DBCStorage <ItemRandomPropertiesEntry>    sItemRandomPropertiesStore;
@@ -178,6 +179,7 @@ TC_GAME_API extern DBCStorage <SpellFocusObjectEntry>        sSpellFocusObjectSt
 TC_GAME_API extern DBCStorage <SpellItemEnchantmentEntry>    sSpellItemEnchantmentStore;
 TC_GAME_API extern DBCStorage <SpellItemEnchantmentConditionEntry> sSpellItemEnchantmentConditionStore;
 TC_GAME_API extern PetFamilySpellsStore                      sPetFamilySpellsStore;
+TC_GAME_API extern std::unordered_set<uint32>                sPetTalentSpells;
 TC_GAME_API extern DBCStorage <SpellRadiusEntry>             sSpellRadiusStore;
 TC_GAME_API extern DBCStorage <SpellRangeEntry>              sSpellRangeStore;
 TC_GAME_API extern DBCStorage <SpellRuneCostEntry>           sSpellRuneCostStore;
