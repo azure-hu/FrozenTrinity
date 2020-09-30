@@ -183,7 +183,7 @@ std::string Transmogrification::GetItemLink(Item* item, WorldSession* session) c
 
     if (int32 itemRandPropId = item->GetItemRandomPropertyId())
     {
-        char* const* suffix = NULL;
+        std::array<char const*, 16> suffix;
         if (itemRandPropId < 0)
         {
             const ItemRandomSuffixEntry* itemRandEntry = sItemRandomSuffixStore.LookupEntry(-item->GetItemRandomPropertyId());
@@ -196,7 +196,7 @@ std::string Transmogrification::GetItemLink(Item* item, WorldSession* session) c
             if (itemRandEntry)
                 suffix = itemRandEntry->Name;
         }
-        if (suffix)
+        if (!suffix.empty())
         {
             std::string test(suffix[(name != temp->Name1) ? loc_idx : DEFAULT_LOCALE]);
             if (!test.empty())

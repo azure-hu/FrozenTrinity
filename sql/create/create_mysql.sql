@@ -1,15 +1,13 @@
-CREATE USER 'trinity'@'localhost' IDENTIFIED BY 'trinity' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0;
 
-GRANT USAGE ON * . * TO 'trinity'@'localhost';
+GRANT ALL PRIVILEGES ON `lich_world` . * TO 'FrozenThrone'@'localhost' WITH GRANT OPTION;
 
-CREATE DATABASE `world` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT ALL PRIVILEGES ON `lich_characters` . * TO 'FrozenThrone'@'localhost' WITH GRANT OPTION;
 
-CREATE DATABASE `characters` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT ALL PRIVILEGES ON `lich_auth` . * TO 'FrozenThrone'@'localhost' WITH GRANT OPTION;
 
-CREATE DATABASE `auth` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-GRANT ALL PRIVILEGES ON `world` . * TO 'trinity'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON `lich_world` . * TO 'FrozenThrone'@'192.168.2.%' WITH GRANT OPTION;
 
-GRANT ALL PRIVILEGES ON `characters` . * TO 'trinity'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON `lich_characters` . * TO 'FrozenThrone'@'192.168.2.%' WITH GRANT OPTION;
 
-GRANT ALL PRIVILEGES ON `auth` . * TO 'trinity'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON `lich_auth` . * TO 'FrozenThrone'@'192.168.2.%' WITH GRANT OPTION;
